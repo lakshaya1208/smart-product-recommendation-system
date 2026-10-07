@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ML-based product recommendation system using purchase probability and ranking.">
+  <title>Smart Product Recommendation System</title>
+  <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-label="Smart Product Recommendation System">SP</div>
+    <div class="topbar-title">
+      <span>ML PROJECT / NEXUS VIT CHENNAI</span>
+      <strong>Smart Product Recommendation System</strong>
+    </div>
+    <span class="dataset-badge">Synthetic demo dataset</span>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Classification + ranking</p>
+        <h1>Predict purchase probability, then recommend the products with the strongest scores.</h1>
+        <p class="hero-description">A lightweight ML system trained on customer-product interactions. Logistic Regression estimates purchase probability for each available product, and the application ranks those predictions to produce personalized Top 5 recommendations.</p>
+      </div>
+      <div class="hero-meta">
+        <div><span>Model</span><strong>Logistic Regression</strong></div>
+        <div><span>Dataset</span><strong id="interaction-count">Loading...</strong></div>
+        <div><span>Inference</span><strong>Client-side model artifact</strong></div>
+      </div>
+    </section>
+
+    <section class="shell metrics-section" aria-label="Model evaluation">
+      <div class="section-label">Held-out test results</div>
+      <div class="metrics-grid" id="metrics"></div>
+    </section>
+
+    <section class="shell recommendation-section" aria-labelledby="recommendations-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Recommendation engine</p>
+          <h2 id="recommendations-title">Generate personalized results</h2>
+        </div>
+        <span class="status-dot" id="model-status"><span></span> Loading model</span>
+      </div>
+
+      <form class="customer-form" id="recommendation-form">
+        <label for="customer-id">Customer ID</label>
+        <div class="form-row">
+          <select id="customer-id" disabled aria-describedby="field-note"></select>
+          <button type="submit" disabled id="recommend-button">Loading...</button>
+        </div>
+        <p class="field-note" id="field-note">Select a demo customer from the synthetic interaction dataset.</p>
+      </form>
+
+      <p class="error" id="error" role="alert" hidden></p>
+
+      <div class="results" id="results" hidden>
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow">Top 5</p>
+            <h3>Products ranked by predicted purchase probability</h3>
+          </div>
+          <span class="result-count" id="result-count"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Rank</th><th>Product</th><th>Category</th><th>Price</th><th>Purchase probability</th></tr>
+            </thead>
+            <tbody id="recommendation-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="empty-state" id="empty-state"><span>01</span><p>Choose a customer and run the model to see ranked recommendations.</p></div>
+    </section>
+
+    <section class="shell how-section">
+      <div class="section-heading simple">
+        <div><p class="eyebrow">Pipeline</p><h2>How it works</h2></div>
+        <p>Each stage is implemented in the project rather than represented as a visual-only concept.</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipeline-step"><span>01</span><strong>Interaction data</strong><p>Customer-product views, carts, purchases and history.</p></div>
+        <div class="pipeline-step"><span>02</span><strong>Preprocessing</strong><p>Missing-value handling and duplicate removal.</p></div>
+        <div class="pipeline-step"><span>03</span><strong>Feature engineering</strong><p>Ratios, purchase history, price and category.</p></div>
+        <div class="pipeline-step"><span>04</span><strong>ML model</strong><p>Balanced Logistic Regression trained offline.</p></div>
+        <div class="pipeline-step"><span>05</span><strong>Prediction</strong><p>Purchase probability for each available product.</p></div>
+        <div class="pipeline-step"><span>06</span><strong>Ranking</strong><p>Sort probabilities and return the Top 5.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer"><span>Smart Product Recommendation System</span><span id="dataset-summary">Loading dataset...</span></footer>
+  <script src="src/app.js" defer></script>
+</body>
+</html>
